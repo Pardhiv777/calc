@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0d1117;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #32CD32;
+        }
+        .calculator {
+            background: #161b22;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            transition: all 0.3s ease-in-out;
+        }
+        .screen {
+            width: calc(100% - 20px);
+            height: 60px;
+            text-align: right;
+            font-size: 2em;
+            padding: 10px;
+            background: #21262d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        button {
+            padding: 18px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 8px;
+            background: #30363d;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background: #484f58;
+            transform: scale(1.07);
+        }
+        .operator, .special {
+            background: #32CD32;
+        }
+        .operator:hover, .special:hover {
+            background: #2ca02c;
+        }
+        .equal {
+            background: #00C853;
+            font-size: 1.8em;
+            grid-row: span 2;
+        }
+        .equal:hover {
+            background: #009624;
+        }
+        @media (max-width: 500px) {
+            .calculator {
+                width: 95%;
+                padding: 20px;
+            }
+            button {
+                font-size: 1.2em;
+                padding: 14px;
+            }
+        }
+        @media (max-width: 350px) {
+            .calculator {
+                width: 100%;
+                padding: 15px;
+            }
+            .screen {
+                font-size: 1.5em;
+                height: 50px;
+            }
+            button {
+                font-size: 1em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <div class="calculator">
+        <input type="text" id="screen" class="screen" disabled>
+        <div class="buttons">
+            <button onclick="clearScreen()" class="special">C</button>
+            <button onclick="appendValue('/')" class="operator">/</button>
+            <button onclick="appendValue('*')" class="operator">*</button>
+            <button onclick="deleteLast()" class="special">←</button>
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('-')" class="operator">-</button>
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('+')" class="operator">+</button>
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="calculate()" class="equal">=</button>
+            <button onclick="appendValue('0')" style="grid-column: span 2;">0</button>
+            <button onclick="appendValue('.')">.</button>
+        </div>
+    </div>
+    <script>
+        let screen = document.getElementById('screen');
+        function appendValue(value) {
+            screen.value += value;
+        }
+        function clearScreen() {
+            screen.value = '';
+        }
+        function deleteLast() {
+            screen.value = screen.value.slice(0, -1);
+        }
+        function calculate() {
+            try {
+                screen.value = eval(screen.value);
+            } catch {
+                screen.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
 
